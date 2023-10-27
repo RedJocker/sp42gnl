@@ -1,0 +1,15 @@
+# emacs temp
+*~
+\#*\#
+
+# bins and deps
+*.o
+*.d
+*.a
+
+**/a.out
+
+# tests
+
+**/tests/
+
