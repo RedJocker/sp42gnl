@@ -6,20 +6,11 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:19:11 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/21 01:13:10 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/27 19:20:36 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-struct s_stringbuilder
-{
-	char			*str;
-	unsigned int	size;
-	unsigned int	capacity;
-};
-
-#define DEFAULT_LINE_SIZE 75
 
 t_stringbuilder	stringbuilder_new(void)
 {
@@ -60,7 +51,7 @@ t_stringbuilder	stringbuilder_addchar(t_stringbuilder builder, char ch)
 		}
 		free(builder->str);
 		builder->str = temp;
-		builder->capacity *= 2; 
+		builder->capacity *= 2;
 	}
 	builder->str[builder->size] = ch;
 	builder->size++;

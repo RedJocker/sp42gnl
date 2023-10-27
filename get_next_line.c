@@ -6,30 +6,43 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/21 01:13:49 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/27 20:30:49 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+void	buffer_flush(t_buffer *buffer, t_stringbuilder builder)
+{
+	while (buffer->is_init && builder && buffer->i < buffer->char_read)
+	{
+		builder = stringbuilder_addchar(builder, buffer->arr[buffer->i]);
+		if (buffer->arr[buffer->i++] == '\n')
+			break ;
+	}
+}
+
 char	*get_next_line(int fd)
 {
-	size_t			char_read;
-	char			ch;
+	static t_buffer	buffer;
 	t_stringbuilder	builder;
 
-	char_read = 1;
 	builder = stringbuilder_new();
-	ch = ' ';
-	while (builder && char_read > 0 && ch != '\n')
+	while (builder && (buffer.char_read > 0 || !buffer.is_init))
 	{
-		char_read = read(fd, &ch, 1);
-		if (char_read > 0)
-			builder = stringbuilder_addchar(builder, ch);
+		buffer_flush(&buffer, builder);
+		if (buffer.i >= buffer.char_read || !buffer.is_init)
+		{
+			buffer.is_init = 1;
+			buffer.i = 0;
+			buffer.char_read = read(fd, buffer.arr, BUFFER_SIZE);
+		}
+		else
+			break ;
 	}
 	if (!builder)
 		return (NULL);
-	if (char_read < 0 || stringbuilder_isempty(builder))
+	if (buffer.char_read < 0 || stringbuilder_isempty(builder))
 	{
 		stringbuilder_destroy(builder);
 		return (NULL);
@@ -37,14 +50,14 @@ char	*get_next_line(int fd)
 	return (stringbuilder_build(builder));
 }
 
-
+/*
 #include <fcntl.h>
 #include <stdio.h>
 int	main(void)
 {
 	const char *path = "./abc.txt";
 	int fd = open(path, O_RDONLY);
-	//int fd = 1;
+	//int fd = 10;
 	char *str;
 
 	printf("\n==START==\n");
@@ -54,7 +67,7 @@ int	main(void)
 		printf("%s", str);
 		str = get_next_line(fd);
 	}
-	printf("\n==END==\n");
+	printf("==END==\n");
 	return (0);
 }
-
+*/ 
