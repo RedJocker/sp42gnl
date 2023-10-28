@@ -6,12 +6,12 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:19:28 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 21:35:35 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/27 21:59:21 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -36,7 +36,7 @@ typedef struct s_buffer
 	ssize_t			char_read;
 	char			arr[BUFFER_SIZE];
 	ssize_t			i;
-	int				is_init;
+	char			is_init;
 }	t_buffer;
 
 t_stringbuilder	stringbuilder_new(void);

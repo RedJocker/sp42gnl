@@ -6,13 +6,14 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 21:05:30 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/27 22:38:23 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#define FD_SIZE 120
 
-static void	flush_buffer(t_buffer *b, t_stringbuilder builder)
+static void	buffer_flush(t_buffer *b, t_stringbuilder builder)
 {
 	while (b->i < BUFFER_SIZE && b->is_init)
 	{
@@ -30,28 +31,33 @@ static void	flush_buffer(t_buffer *b, t_stringbuilder builder)
 	}
 }
 
+static void	buffer_fill(t_buffer *b, int fd)
+{
+	b[fd].char_read = read(fd, b[fd].arr, BUFFER_SIZE);
+	b[fd].i = 0;
+	b[fd].is_init = 1;
+}
+
 char	*get_next_line(int fd)
 {
-	static t_buffer	b;
+	static t_buffer	b[FD_SIZE];
 	t_stringbuilder	builder;
 
-	b.char_read = 1;
+	if (fd < 0 || fd >= FD_SIZE)
+		return (NULL);
+	b[fd].char_read = 1;
 	builder = stringbuilder_new();
-	while (builder && (b.char_read > 0 || !b.is_init))
+	while (builder && (b[fd].char_read > 0 || !b[fd].is_init))
 	{
-		flush_buffer(&b, builder);
-		if (b.i >= BUFFER_SIZE || !b.is_init)
-		{
-			b.char_read = read(fd, b.arr, BUFFER_SIZE);
-			b.i = 0;
-			b.is_init = 1;
-		}
+		buffer_flush(b + fd, builder);
+		if (b[fd].i >= BUFFER_SIZE || !b[fd].is_init)
+			buffer_fill(b, fd);
 		else
 			break ;
 	}
 	if (!builder)
 		return (NULL);
-	if (b.char_read < 0 || stringbuilder_isempty(builder))
+	if (b[fd].char_read < 0 || stringbuilder_isempty(builder))
 	{
 		stringbuilder_destroy(builder);
 		return (NULL);
