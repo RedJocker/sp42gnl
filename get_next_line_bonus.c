@@ -6,12 +6,11 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 22:38:23 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:26:30 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#define FD_SIZE 120
+#include "get_next_line_bonus.h"
 
 static void	buffer_flush(t_buffer *b, t_stringbuilder builder)
 {
@@ -64,24 +63,24 @@ char	*get_next_line(int fd)
 	}
 	return (stringbuilder_build(builder));
 }
-/*
-#include <fcntl.h>
-#include <stdio.h>
-int	main(void)
-{
-	const char *path = "./abc.txt";
-	int fd = open(path, O_RDONLY);
-	//int fd = 10;
-	char *str;
 
-	printf("\n==START==\n");
-	str = get_next_line(fd);
-	while (str)
-	{
-		printf("%s", str);
-		str = get_next_line(fd);
-	}
-	printf("==END==\n");
-	return (0);
-}
-*/
+/* #include <fcntl.h> */
+/* #include <stdio.h> */
+/* int	main(void) */
+/* { */
+/* 	//const char *path = "./abc.txt"; */
+/* 	const char *path = "./test_1000000a.txt"; */
+/* 	int fd = open(path, O_RDONLY); */
+/* 	//int fd = 10; */
+/* 	char *str; */
+
+/* 	printf("\n==START==\n"); */
+/* 	str = get_next_line(fd); */
+/* 	while (str) */
+/* 	{ */
+/* 		printf("%s", str); */
+/* 		str = get_next_line(fd); */
+/* 	} */
+/* 	printf("==END==\n"); */
+/* 	return (0); */
+/* } */

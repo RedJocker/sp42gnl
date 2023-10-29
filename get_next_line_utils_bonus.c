@@ -6,11 +6,11 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:19:11 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 19:20:36 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/28 17:49:18 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 t_stringbuilder	stringbuilder_new(void)
 {

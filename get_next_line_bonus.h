@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:19:28 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 21:59:21 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/10/28 18:01:19 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # endif
 
 # define DEFAULT_LINE_SIZE 90
+# define FD_SIZE 120
 
 typedef struct s_stringbuilder	*t_stringbuilder;
 
