@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/10/27 21:05:30 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:58:42 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,3 @@ char	*get_next_line(int fd)
 	}
 	return (stringbuilder_build(builder));
 }
-/*
-#include <fcntl.h>
-#include <stdio.h>
-int	main(void)
-{
-	const char *path = "./abc.txt";
-	int fd = open(path, O_RDONLY);
-	//int fd = 10;
-	char *str;
-
-	printf("\n==START==\n");
-	str = get_next_line(fd);
-	while (str)
-	{
-		printf("%s", str);
-		str = get_next_line(fd);
-	}
-	printf("==END==\n");
-	return (0);
-}
-*/
