@@ -6,19 +6,19 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/14 18:58:05 by maurodri         ###   ########.fr       */
+/*   Updated: 2023/11/17 20:34:28 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static void	buffer_flush(t_buffer *b, t_stringbuilder builder)
+static void	buffer_flush(t_buffer *b, t_stringbuilder *builder)
 {
-	while (b->i < BUFFER_SIZE && b->is_init)
+	while (*builder && b->i < BUFFER_SIZE && b->is_init)
 	{
 		if (b->arr[b->i] != '\0')
 		{
-			builder = stringbuilder_addchar(builder, b->arr[b->i]);
+			*builder = stringbuilder_addchar(*builder, b->arr[b->i]);
 			if (b->arr[b->i] == '\n')
 			{
 				b->arr[b->i] = '\0';
@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 	builder = stringbuilder_new();
 	while (builder && (b[fd].char_read > 0 || !b[fd].is_init))
 	{
-		buffer_flush(b + fd, builder);
+		buffer_flush(b + fd, &builder);
 		if (b[fd].i >= BUFFER_SIZE || !b[fd].is_init)
 			buffer_fill(b, fd);
 		else
