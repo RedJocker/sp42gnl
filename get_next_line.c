@@ -6,7 +6,7 @@
 /*   By: maurodri <maurodri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 21:17:35 by maurodri          #+#    #+#             */
-/*   Updated: 2023/11/16 23:31:14 by maurodri         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:42:46 by maurodri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,25 @@ char	*get_next_line(int fd)
 	}
 	return (stringbuilder_build(builder));
 }
+
+/* #include <fcntl.h> */
+/* #include <stdio.h> */
+/* int main(void) */
+/* { */
+/* 	char *str; */
+/* 	char *str2; */
+/* 	str = get_next_line(1); */
+/* 	printf("1[%s]\n", str); */
+/* 	str2 = get_next_line(0); */
+/* 	printf("2[%s]\n", str2); */
+/* 	free(str); */
+/* 	while(str) */
+/* 	{ */
+/* 		str = get_next_line(1); */
+/* 		printf("1[%s]\n", str); */
+/* 		str2 = get_next_line(0); */
+/* 		printf("2[%s]\n", str2); */
+/* 		free(str); */
+/* 	} */
+/* 	return (0); */
+/* } */
